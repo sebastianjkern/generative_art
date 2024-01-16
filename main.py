@@ -78,7 +78,6 @@ if __name__ == "__main__":
         filled = list(map(fill, discs))
 
         circles = reduce(overlay, filled)
-        # Random test stuff below
 
         for pair in combinations(masks, r=2):
             i = intersect(*pair)
