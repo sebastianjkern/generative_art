@@ -85,4 +85,6 @@ if __name__ == "__main__":
 
             circles = circles.mask(intersection, i.invert())
 
+        bg = bg.alpha_overlay(film_grain(ctx).to_lab().transparency(0.05))
+
         bg.mask(bg.alpha_overlay(circles), rr_mask.invert()).save("image.png")

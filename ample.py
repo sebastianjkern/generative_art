@@ -1,6 +1,6 @@
 from sdf_ui import *
 
-SIZE = (500, 1500)
+SIZE = (500, 1250)
 
 beige = (0.933, 0.875, 0.753, 1)
 blue = (0.059, 0.333, 0.569, 1)
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     with Context(SIZE) as ctx:
         bg = clear_color(ctx, beige)
 
-        distance = ctx.percent_y(20)
+        distance = ctx.percent_y(25)
         radius = distance/2
 
         x = ctx.percent_x(50)
@@ -39,5 +39,7 @@ if __name__ == "__main__":
         bg = bg.mask(circles, d1.invert())
         bg = bg.mask(circles, d2.invert())
         bg = bg.mask(circles, d3.invert())
+
+        bg = bg.alpha_overlay(film_grain(ctx).to_lab().transparency(0.05))
 
         bg.save("ample.png")

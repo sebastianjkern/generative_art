@@ -38,4 +38,7 @@ if __name__ == "__main__":
         bg = bg.alpha_overlay(bc2)
         bg = bg.alpha_overlay(sc1)
         bg = bg.alpha_overlay(sc2)
+
+        bg = bg.alpha_overlay(film_grain(ctx).to_lab().transparency(0.05))
+
         bg.save("black_and_red.png")

@@ -45,5 +45,6 @@ if __name__ == "__main__":
 
             bg = bg.alpha_overlay(rr)
 
+        bg = bg.alpha_overlay(film_grain(ctx).to_lab().transparency(0.05))
+
         bg.save("dawn.png")
-        
