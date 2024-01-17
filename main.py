@@ -28,22 +28,6 @@ dark_grey = (0.184, 0.184, 0.184, 1.0)
 colors = [light_blue, beige, orange, light_orange, dark_grey]
 
 # Functions
-def striped_circle(context, color=(1, 0, 0, 1), center=(SIZE[0]/2, SIZE[1]/2), radius=50):
-    transparent = (*color[:3], 0)
-
-    line_thickness = 2
-    gap = 5
-
-    sdf = disc(context, center, radius)
-    
-    background = clear_color(context, (0, 0, 0, 0))
-
-    for i in range(int(radius/(line_thickness + gap))):
-        outline = sdf.outline(color, transparent, inflate=-i*(line_thickness+gap))
-        background = background.alpha_overlay(outline)
-
-    return background
-
 def center():
     return SIZE[0] / 2, SIZE[1]/2
 
@@ -85,6 +69,6 @@ if __name__ == "__main__":
 
             circles = circles.mask(intersection, i.invert())
 
+        bg = bg.mask(bg.alpha_overlay(circles), rr_mask.invert())
         bg = bg.alpha_overlay(film_grain(ctx).to_lab().transparency(0.05))
-
-        bg.mask(bg.alpha_overlay(circles), rr_mask.invert()).save("image.png")
+        bg.save("image.png")
